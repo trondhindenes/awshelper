@@ -36,6 +36,7 @@ If you're a fan of `awslogs` you can now run it using `awshelper`:
 - awshelper streams stdout, but other output streams haven't been fully tested
 - non-utf characters in the out stream might fail (not tested)
 - a profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
+- it will only work with profiles configured with `aws configure sso`. If you point to a profile with regular access key/secret, it won't work.
 
 ## Test using docker:
 `docker run -it -v ~/.aws:/root/.aws:ro ubuntu`
