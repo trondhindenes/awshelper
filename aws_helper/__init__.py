@@ -73,7 +73,10 @@ def get_profile_details(profile_name):
     config.read(config_file)
     section = f'profile {profile_name}'
     out_dict = {}
-    profile_data = config[section]
+    try:
+        profile_data = config[section]
+    except KeyError:
+        return None
     for key in profile_data:
         out_dict[key] = profile_data[key]
     return out_dict
@@ -84,6 +87,8 @@ def main():
     if not profile_name:
         raise ValueError('no profile found')
     profile_details = get_profile_details(profile_name)
+    if not profile_details:
+        sys.exit('Profile not found')
     cache_key = generate_cache_key(**profile_details)
     cache_data = read_cache_json(cache_key)
     new_env_vars = {
