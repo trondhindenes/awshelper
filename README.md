@@ -24,18 +24,20 @@ install it:
 You should use a root/sudo user to install it globally
 
 you can either use env vars to specify your profile:
-`AWS_PROFILE=mytest awshelper <command>` or
-`awshelper --profile mytest <command>` or
-`awshelper --profile=mytest <command>`.
+`AWS_PROFILE=mytest awshelper <command>` or   
+`awshelper --profile mytest <command>` or   
+`awshelper --profile=mytest <command>`.   
 In any case, a named profile IS required (at least for now)
 
 If you're a fan of `awslogs` you can now run it using `awshelper`:
-`AWS_PROFILE=mytest pipenv run awshelper awslogs groups --aws-region eu-central-1`
+`AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`   
+...or `eksctl`:
+`AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`
 
 ## Limitations
 - awshelper streams stdout, but other output streams haven't been fully tested
 - non-utf characters in the out stream might fail (not tested)
-- a profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
+- an AWS profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
 - it will only work with profiles configured with `aws configure sso`. If you point to a profile with regular access key/secret, it won't work.
 
 ## Test using docker:
