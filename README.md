@@ -33,3 +33,12 @@ If you're a fan of `awslogs` you can now run it using `awshelper`:
 - awshelper streams stdout, but other output streams haven't been fully tested
 - non-utf characters in the out stream might fail (not tested)
 - a profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
+
+## Test using docker:
+`docker run -it -v ~/.aws:/root/.aws:ro ubuntu`
+then run
+```
+apt-get update && apt-get install python3-pip
+pip3 install awshelper 
+AWS_PROFILE=mytest awshelper <my command>
+```
