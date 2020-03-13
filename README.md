@@ -19,7 +19,9 @@ If all this works, you're good to go.
 
 ## How to use awshelper 
 install it:   
-`pip install awshelper` or `pip3 install awshelper` depending on your setup
+`pip install awshelper` or `pip3 install awshelper` depending on your setup. 
+You should use a root/sudo user to install it globally
+
 you can either use env vars to specify your profile:
 `AWS_PROFILE=mytest awshelper <command>` or
 `awshelper --profile mytest <command>` or
