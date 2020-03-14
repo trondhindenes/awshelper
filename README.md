@@ -29,10 +29,10 @@ you can either use env vars to specify your profile:
 `awshelper --profile=mytest <command>`.   
 In any case, a named profile IS required (at least for now)
 
-If you're a fan of `awslogs` you can now run it using `awshelper`:
-`AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`   
-...or `eksctl`:
-`AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`
+If you're a fan of `awslogs` you can now run it using `awshelper`:   
+`AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`     
+...or `eksctl`:   
+`AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`   
 
 ## Limitations
 - awshelper streams stdout, but other output streams haven't been fully tested
