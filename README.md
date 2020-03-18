@@ -29,10 +29,10 @@ you can either use env vars to specify your profile:
 `awshelper --profile=mytest <command>`.   
 In any case, a named profile IS required (at least for now)
 
-If you're a fan of `awslogs` you can now run it using `awshelper`:
-`AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`   
-...or `eksctl`:
-`AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`
+If you're a fan of `awslogs` you can now run it using `awshelper`:   
+`AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`     
+...or `eksctl`:   
+`AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`   
 
 ## Integration with External Process-based credentials
 Some AWS tools such as the aws cli, supports "Sourcing Credentials with an External Process", 
@@ -66,6 +66,7 @@ so use this at your own peril!
 - non-utf characters in the out stream might fail (not tested)
 - an AWS profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
 - it will only work with profiles configured with `aws configure sso`. If you point to a profile with regular access key/secret, it won't work.
+- awshelper does not (yet) respect the "wrapped" command's exit code. It will always exit 0 as long as it is able to retrieve an aws credential. This may not e what you want, and is on the list of things to fix.
 
 ## Test using docker:
 `docker run -it -v ~/.aws:/root/.aws:ro ubuntu`
