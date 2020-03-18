@@ -57,7 +57,9 @@ EXTERNAL_PROCESS_MODE=true AWS_PROFILE=someprofile awshelper
 
 I'm not quite sure how aws cli deals with the potential "circular dependency" of 
 calling `aws configure sso` with a profile where a `credential_process` statement is added, 
-so use this at your own peril!
+so use this at your own peril! You might also have problems using this with various tools - 
+I tested quickly with the `serverless` tools which are javascript-based and it seems to NOT work there. 
+Your mileage may vary
 
 
 
