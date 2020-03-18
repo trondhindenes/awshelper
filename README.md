@@ -34,6 +34,33 @@ If you're a fan of `awslogs` you can now run it using `awshelper`:
 ...or `eksctl`:
 `AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`
 
+## Integration with External Process-based credentials
+Some AWS tools such as the aws cli, supports "Sourcing Credentials with an External Process", 
+described here: <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sourcing-external.html>.
+awshelper can function as the external process. In this mode, instead of injecting environment variables to a wrapped process, 
+it will instead output the necessary json structure to std when called. To use this mode, run awshelper like this:
+`AWS_PROFILE=mytest EXTERNAL_PROCESS_MODE=true awshelper`
+The recommended way to use this, is to add the following to your `/.aws/config` file:
+```
+[profile myprofile]
+region = eu-central-1
+credential_process = /home/trond/bin/awshelper_prochelper.sh
+```
+
+and then that bash file could look something like this:
+```bash
+╰─ cat awshelper_prochelper.sh 
+#!/usr/bin/env bash
+
+EXTERNAL_PROCESS_MODE=true AWS_PROFILE=someprofile awshelper
+```
+
+I'm not quite sure how aws cli deals with the potential "circular dependency" of 
+calling `aws configure sso` with a profile where a `credential_process` statement is added, 
+so use this at your own peril!
+
+
+
 ## Limitations
 - awshelper streams stdout, but other output streams haven't been fully tested
 - non-utf characters in the out stream might fail (not tested)

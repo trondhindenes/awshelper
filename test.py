@@ -1,3 +1,3 @@
-import aws_helper
+from awshelper import util
 
-aws_helper.main()
+util.main()
