@@ -14,8 +14,7 @@ and extracts "old-school" environment variables from them. It then executes the 
 ## Prereqs:
 - awshelper requires python 3.x (tested on 3.8) and pip
 - aws cli v2 installed (make sure you run a recent build)
-- your org is set up with AWS SSO so that you can run `aws configure sso`
-- make sure your aws cli is working by running `aws sts get-caller-identity --profile myprofile`
+- your org is set up with AWS SSO so that you can run `aws configure sso --profile myprofile` (a named profile is needed)
 If all this works, you're good to go.
 
 ## How to use awshelper 
@@ -62,13 +61,9 @@ I tested quickly with the `serverless` tools which are javascript-based and it s
 Your mileage may vary
 
 
-
 ## Limitations
-- awshelper streams stdout, but other output streams haven't been fully tested
-- non-utf characters in the out stream might fail (not tested)
 - an AWS profile name IS needed - either specified using environment variables or parameters. If both are specified, the parameter "wins".
 - it will only work with profiles configured with `aws configure sso`. If you point to a profile with regular access key/secret, it won't work.
-- awshelper does not (yet) respect the "wrapped" command's exit code. It will always exit 0 as long as it is able to retrieve an aws credential. This may not e what you want, and is on the list of things to fix.
 
 ## Test using docker:
 `docker run -it -v ~/.aws:/root/.aws:ro ubuntu`
