@@ -132,21 +132,15 @@ def main():
 
     process = subprocess.Popen(
         [' '.join(incoming_args)],
-        stdout=subprocess.PIPE,
-        universal_newlines=True,
-        shell=True, env=exec_env_vars)
+        stdout=sys.stdout,
+        stdin=sys.stdin,
+        stderr=sys.stderr,
+        shell=True, env=exec_env_vars, universal_newlines=True)
 
     while True:
-        output = process.stdout.readline()
-        print(output.strip())
-        # Do something else
         return_code = process.poll()
         if return_code is not None:
-            print('RETURN CODE', return_code)
-            # Process has finished, read rest of the output
-            for output in process.stdout.readlines():
-                print(output.strip())
-            break
+            exit(return_code)
 
 
 if __name__ == "__main__":
