@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='awshelper',
-    version='0.5',
+    version='0.7',
     description='helps you run aws commands with sso-based credentials',
     url='https://github.com/trondhindenes/awshelper',
     author='Trond Hindenes',
