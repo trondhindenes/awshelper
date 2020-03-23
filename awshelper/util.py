@@ -100,7 +100,8 @@ def generate_process_cred_json(credential_data):
 
 
 def call_sts_get_caller_identity(profile_name):
-    #sts_call_result = subprocess.run(['aws', 'sts', 'get-caller-identity', '--profile', profile_name], shell=True)
+    # Altho we have an sso session, we might not have the cli cache. The first aws call generates it, so we call get-caller-identity.
+    # This only happens if the cache file is missing, as it takes a few moments.
     sts_call_result = subprocess.check_output(f'aws sts get-caller-identity --profile {profile_name}', shell=True, universal_newlines=True)
     try:
         sts_call_data = json.loads(sts_call_result)
