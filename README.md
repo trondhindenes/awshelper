@@ -28,10 +28,16 @@ you can either use env vars to specify your profile:
 `awshelper --profile=mytest <command>`.   
 In any case, a named profile IS required (at least for now)
 
+In some cases, you may have an SSO session, but not a valid aws cli credentials cache file, 
+since these are generated when you run the first aws cli command after refreshing sso credentials.
+awshelper tries to be smart about this, and run aws cli commands if needed, to refresh the cache.
+It attemps to print clearly what is happening and, in case of errors, what you need to do. 
+
 If you're a fan of `awslogs` you can now run it using `awshelper`:   
 `AWS_PROFILE=mytest awshelper awslogs groups --aws-region eu-central-1`     
 ...or `eksctl`:   
 `AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`   
+
 
 ## Integration with External Process-based credentials
 Some AWS tools such as the aws cli, supports "Sourcing Credentials with an External Process", 
