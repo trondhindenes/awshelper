@@ -1,9 +1,14 @@
 from setuptools import setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='awshelper',
-    version='0.9',
+    version='1.0',
     description='helps you run aws commands with sso-based credentials',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url='https://github.com/trondhindenes/awshelper',
     author='Trond Hindenes',
     author_email='trond@hindenes.com',
