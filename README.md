@@ -1,7 +1,7 @@
 # AWS Helper
 
 <https://pypi.org/project/awshelper/>   
-A utility that lets you use AWS SSO credentials when running existing commands.
+A utility that lets you use AWS SSO credentials when running tools that talk to AWS.
 
 ## Rationale
 AWS CLI v2 and AWS SSO use a completely new and different way to persist aws credentials.
