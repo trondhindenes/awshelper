@@ -173,8 +173,9 @@ def main():
     if not incoming_args:
         return
 
+    run_args = ' '.join(incoming_args)
     process = subprocess.Popen(
-        [' '.join(incoming_args)],
+        run_args,
         stdout=sys.stdout,
         stdin=sys.stdin,
         stderr=sys.stderr,
