@@ -174,7 +174,6 @@ def main():
         return
 
     run_args = ' '.join(incoming_args)
-    print(run_args)
     process = subprocess.Popen(
         run_args,
         stdout=sys.stdout,
