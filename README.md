@@ -38,6 +38,10 @@ If you're a fan of `awslogs` you can now run it using `awshelper`:
 ...or `eksctl`:   
 `AWS_PROFILE=mytest awshelper eksctl create cluster -f eksfargate.yml`   
 
+## Other environment variables
+If you run scripts that need to determine whether or not they're executed with awshelper, you can use the following environment variables to determine that:
+`AWSHELPER_ENABLED` will have a value of `YES`.
+`AWSHELPER_PROFILE` will be set to whatever profile got configured using `AWS_PROFILE` or the `--profile` parameter as described above.
 
 ## Integration with External Process-based credentials
 Some AWS tools such as the aws cli, supports "Sourcing Credentials with an External Process", 

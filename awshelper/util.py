@@ -161,6 +161,9 @@ def main():
         'AWS_ACCESS_KEY_ID': cache_data['Credentials']['AccessKeyId'],
         'AWS_SECRET_ACCESS_KEY': cache_data['Credentials']['SecretAccessKey'],
         'AWS_SESSION_TOKEN': cache_data['Credentials']['SessionToken'],
+        'AWSHELPER_ENABLED': 'YES',
+        'AWSHELPER_PROFILE': profile_name
+
     }
 
     exec_env_vars = os.environ.copy()
