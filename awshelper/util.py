@@ -8,6 +8,7 @@ import json
 import warnings
 from datetime import datetime
 import pytz
+import time
 
 
 def read_cache_json(cache_key):
@@ -187,6 +188,7 @@ def main():
         return_code = process.poll()
         if return_code is not None:
             exit(return_code)
+        time.sleep(0.05)
 
 
 if __name__ == "__main__":

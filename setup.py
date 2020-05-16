@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='awshelper',
-    version='1.3',
+    version='1.4',
     description='helps you run aws commands with sso-based credentials',
     long_description=long_description,
     long_description_content_type="text/markdown",
