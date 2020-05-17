@@ -90,6 +90,10 @@ def is_external_process_mode():
         return True
     return False
 
+def is_dotenv_file_mode():
+    if os.getenv('DOTENV_FILE_MODE', None):
+        return True
+    return False
 
 def check_cache_expiry(cache_expiry_string):
     cache_expiry = datetime.strptime(cache_expiry_string, '%Y-%m-%dT%H:%M:%SUTC')
@@ -111,6 +115,37 @@ def generate_process_cred_json(credential_data):
         'SessionToken': credential_data['Credentials']['SessionToken'],
         'Expiration': credential_data['Credentials']['Expiration']
     }
+
+def inject_dotenv_data(credential_data):
+    print('configuring .env file')
+    access_key_id = credential_data['Credentials']['AccessKeyId']
+
+    curr_path = os.getcwd()
+    dotenv_full_path = os.path.join(curr_path, '.env')
+    if not os.path.exists(dotenv_full_path):
+        current_contents_lines = []
+    else:
+        with open(dotenv_full_path, 'r') as read_stream:
+            current_contents_lines = read_stream.readlines()
+    
+    access_key_id_configured = False
+    current_contents = {}
+    for line in current_contents_lines:
+        key = line.split('=')[0]
+        value = line.split('=')[1]
+        current_contents[key] = value
+
+    creds_dict = {
+        'AWS_ACCESS_KEY_ID': credential_data['Credentials']['AccessKeyId'] + os.linesep,
+        'AWS_SECRET_ACCESS_KEY': credential_data['Credentials']['SecretAccessKey'] + os.linesep,
+        'AWS_SESSION_TOKEN': credential_data['Credentials']['SessionToken'] + os.linesep
+    }
+
+    final_dict = {**current_contents, **creds_dict}
+    with open(dotenv_full_path, 'w') as stream:
+        for item in final_dict.keys():
+            value = final_dict[item]
+            stream.write(f'{item}={value}')
 
 
 def call_sts_get_caller_identity(profile_name):
@@ -157,6 +192,9 @@ def main():
 
     if is_external_process_mode():
         print(json.dumps(generate_process_cred_json(cache_data), indent=4, sort_keys=True))
+        exit(0)
+    elif is_dotenv_file_mode():
+        inject_dotenv_data(cache_data)
         exit(0)
     new_env_vars = {
         'AWS_ACCESS_KEY_ID': cache_data['Credentials']['AccessKeyId'],
