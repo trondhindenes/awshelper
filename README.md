@@ -75,7 +75,9 @@ Your mileage may vary
 It can be hard to use a wrapper process such as `awshelper` when debugging things from an IDE etc.
 In order to support this type of workflow, awshelper can inject credentials into a `.env` file, which most modern IDE's can read and use as source of environment variables when it starts your project.
 In order to do this, simply run awshelper like this:
-`AWS_PROFILE=mytest DOTENV_FILE_MODE=true awshelper`. You need to run awshelper in the directory where the .env file exists (or should be created). Any existing values in the .env file will be retained, only the necessary AWS credentials values will be updated.
+`AWS_PROFILE=mytest DOTENV_FILE_MODE=true awshelper`. You need to run awshelper in the directory where the .env file exists (or should be created). Any existing values in the .env file will be retained, only the necessary AWS credentials values will be updated. 
+
+You can wrap this functionality in a bash script and use it with IntelliJ's "run external tool" or similar, to ensure your `.env` file always contains a valid set of credentials.
 
 
 ## Limitations
