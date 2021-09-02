@@ -96,7 +96,21 @@ def is_dotenv_file_mode():
     return False
 
 def check_cache_expiry(cache_expiry_string):
-    cache_expiry = datetime.strptime(cache_expiry_string, '%Y-%m-%dT%H:%M:%SUTC')
+    cache_expiry = None
+    try:
+        cache_expiry = datetime.strptime(cache_expiry_string, '%Y-%m-%dT%H:%M:%SUTC')
+    except:
+        pass
+
+    if not cache_expiry:
+        try:
+            cache_expiry = datetime.strptime(cache_expiry_string, '%Y-%m-%dT%H:%M:%SZ')
+        except:
+            pass
+
+    if not cache_expiry:
+        raise ValueError(f'Unable to parse cache expiry timestamp {cache_expiry_string}')
+
     cache_expiry = pytz.utc.localize(cache_expiry)
 
     current_time = datetime.utcnow()
